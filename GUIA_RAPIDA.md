@@ -1,4 +1,4 @@
-# 🚀 Guía Rápida de Uso
+# 🚀 Guía Rápida - Análisis de Vehículos y Personas
 
 ## Inicio Rápido (3 Pasos)
 
@@ -20,17 +20,19 @@ pip install -r requirements.txt
 streamlit run video_detector.py
 ```
 
-### 2️⃣ Subir tu video
+### 2️⃣ Subir tu video de tráfico/monitoreo
 
 1. Abre tu navegador en `http://localhost:8501`
 2. Haz clic en "📤 Sube tu video"
-3. Selecciona tu archivo de video
+3. Selecciona tu archivo de video (ideal: cámaras de tráfico, vigilancia)
 
-### 3️⃣ Detectar y descargar
+### 3️⃣ Analizar movimiento y descargar
 
 1. Ajusta el umbral de confianza si lo deseas (sidebar)
 2. Haz clic en "🚀 Detectar Objetos"
-3. Descarga el video procesado
+3. **Observa**: trayectorias, velocidades, tiempos de permanencia
+4. **Revisa**: la tabla de estadísticas detalladas por objeto
+5. Descarga el video procesado con todas las anotaciones
 
 ---
 
@@ -102,42 +104,57 @@ El umbral determina qué tan "seguro" debe estar el modelo:
 
 ## 📝 Casos de Uso Prácticos
 
-### 1. Análisis de Tráfico
+### 1. 🚦 Análisis de Tráfico Urbano
+**Objetivo**: Contar vehículos, medir flujo, analizar patrones
 ```bash
-python batch_processor.py \
-  --input trafico_ciudad.mp4 \
-  --output analisis_trafico.mp4 \
-  --confidence 0.6
+streamlit run video_detector.py
+# Sube un video de intersección o avenida
 ```
-Detecta: coches, motos, autobuses, camiones, peatones
+**Obtienes:**
+- Conteo de cada tipo de vehículo (coches, motos, camiones, autobuses)
+- Trayectorias de cada vehículo
+- Tiempo de permanencia en intersección
+- Velocidades promedio
+- Tabla exportable con todos los datos
 
-### 2. Seguridad y Vigilancia
+### 2. 🏙️ Monitoreo de Zonas Peatonales
+**Objetivo**: Analizar flujo peatonal y aglomeraciones
 ```bash
-python batch_processor.py \
-  --input camara_seguridad.mp4 \
-  --output deteccion_personas.mp4 \
-  --confidence 0.7 \
-  --model yolov8m.pt
+streamlit run video_detector.py
+# Sube video de zona peatonal, plaza o parque
 ```
-Detecta: personas, vehículos, objetos sospechosos
+**Obtienes:**
+- Tracking individual de cada persona
+- Patrones de movimiento y trayectorias
+- Tiempo de permanencia en la zona
+- Identificación de puntos de congestión
+- Estadísticas de afluencia
 
-### 3. Análisis de Vida Salvaje
+### 3. 🔒 Seguridad y Vigilancia
+**Objetivo**: Monitorear accesos y detectar movimientos
 ```bash
-python batch_processor.py \
-  --input safari.mp4 \
-  --output animales_detectados.mp4 \
-  --confidence 0.5
+streamlit run video_detector.py
+# Sube video de cámara de seguridad
 ```
-Detecta: elefantes, jirafas, cebras, pájaros, etc.
+**Obtienes:**
+- Tracking de personas y vehículos
+- Registro de trayectorias completas
+- Tiempo de permanencia sospechoso
+- Velocidades inusuales
+- Datos para investigación posterior
 
-### 4. Control de Inventario
+### 4. 📊 Estudios de Movilidad
+**Objetivo**: Análisis para planificación urbana
 ```bash
-python batch_processor.py \
-  --input almacen.mp4 \
-  --output conteo_objetos.mp4 \
-  --confidence 0.6
+streamlit run video_detector.py
+# Sube videos de diferentes ubicaciones/horarios
 ```
-Detecta: cajas, pallets, productos específicos
+**Obtienes:**
+- Patrones de desplazamiento
+- Proporción vehículos/peatones/bicicletas
+- Velocidades promedio por tipo
+- Datos comparativos entre ubicaciones
+- Base de datos para decisiones urbanas
 
 ---
 
@@ -164,37 +181,56 @@ Detecta: cajas, pallets, productos específicos
 
 ---
 
-## 💡 Tips y Trucos
+## 💡 Tips y Trucos para Análisis de Movimiento
 
-### 1. Procesamiento Rápido
-Para procesar rápidamente múltiples videos:
-```bash
-for video in *.mp4; do
-    python batch_processor.py --input "$video" --output "detected_$video"
-done
-```
+### 1. Mejores Resultados en Análisis de Tráfico
+**Para cámaras de tráfico:**
+- Usa videos con cámara fija (sin movimiento)
+- Resolución mínima recomendada: 720p
+- Iluminación adecuada mejora la detección
+- Ángulo cenital o semi-cenital funciona mejor
 
-### 2. Detección de Solo Personas
-Edita `video_detector.py` para filtrar solo personas:
-```python
-if model.names[class_id] == 'person':
-    # Solo procesa personas
-```
+### 2. Interpretar las Trayectorias
+**Líneas verdes en el video:**
+- Más gruesas = movimiento reciente
+- Más finas = movimiento pasado
+- Trayectorias rectas = movimiento constante
+- Trayectorias zigzag = objeto deteniéndose/acelerando
 
-### 3. Guardar Estadísticas en CSV
-Modifica el script para exportar las estadísticas:
-```python
-import csv
-with open('estadisticas.csv', 'w') as f:
-    writer = csv.writer(f)
-    writer.writerows(detected_objects.items())
-```
+### 3. Entender las Velocidades
+**El sistema muestra píxeles/segundo:**
+- Alta velocidad (>100 px/s) = vehículos rápidos
+- Media velocidad (30-100 px/s) = vehículos normales o personas corriendo
+- Baja velocidad (<30 px/s) = peatones o vehículos lentos
+- Para convertir a km/h necesitas calibración con referencias conocidas
 
-### 4. Procesamiento en Tiempo Real
-Usa la webcam en lugar de un archivo:
-```python
-cap = cv2.VideoCapture(0)  # 0 = webcam por defecto
-```
+### 4. Análisis de Tiempos de Permanencia
+**Usa esta métrica para:**
+- Detectar congestión (tiempos largos en intersección)
+- Identificar estacionamiento no autorizado
+- Analizar tiempo de cruce peatonal
+- Estudiar comportamiento en zonas específicas
+
+### 5. Filtrar Solo Vehículos o Personas
+**En la tabla de resultados:**
+- Busca en la columna "Clase"
+- Filtra manualmente por: car, motorcycle, bus, truck, person
+- Suma las distancias/velocidades por tipo
+- Compara comportamiento entre categorías
+
+### 6. Exportar Datos para Análisis
+**Usa la tabla interactiva:**
+- Copia los datos directamente
+- Pega en Excel o Google Sheets
+- Crea gráficos personalizados
+- Genera reportes profesionales
+
+### 7. Mejora el Tracking
+**Para mejor seguimiento:**
+- Umbral de confianza: 0.5-0.6 (balance)
+- Videos más largos = más datos estadísticos
+- Evita cambios bruscos de iluminación
+- Mantén distancia de cámara constante
 
 ---
 
@@ -235,4 +271,29 @@ Si encuentras algún problema:
 2. Verifica que todas las dependencias estén instaladas
 3. Consulta el README.md para más detalles
 
-**¡Disfruta detectando objetos! 🎬🔍**
+---
+
+## 📊 Visualización de Resultados
+
+### En el Video Procesado Verás:
+- **Bounding boxes**: Rectángulos alrededor de cada objeto
+- **🟩 Líneas verdes**: Trayectoria completa del objeto
+- **🟨 Texto amarillo** (arriba): Velocidad actual en px/s
+- **🔵 Texto cian** (abajo): Tiempo en escena en segundos
+- **ID numérico**: Identificador único de cada objeto
+
+### En la Tabla de Estadísticas:
+- **ID**: Identificador único del tracking
+- **Clase**: Tipo de objeto (car, person, motorcycle, etc.)
+- **Tiempo en escena**: Segundos totales visible
+- **Distancia recorrida**: Píxeles totales de movimiento
+- **Velocidad promedio**: Velocidad media durante su recorrido
+- **Frames detectado**: Cuántos frames apareció
+
+### Métricas de Resumen:
+- **Objetos rastreados**: Total de objetos con tracking único
+- **Tiempo promedio**: Media de permanencia en escena
+- **Velocidad máxima**: El objeto más rápido detectado
+- **Distancia total**: Suma de todas las distancias recorridas
+
+**¡Analiza el movimiento con inteligencia artificial! 🚗👥📊**

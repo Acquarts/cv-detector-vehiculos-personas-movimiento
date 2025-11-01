@@ -3,12 +3,15 @@
 ## 📋 Archivos Principales
 
 ### 🎯 `video_detector.py`
-**Aplicación principal con interfaz web Streamlit**
+**Aplicación principal con interfaz web Streamlit y análisis avanzado**
 - Interfaz gráfica interactiva
 - Sube videos mediante drag & drop
-- Visualización en tiempo real
-- Estadísticas de objetos detectados
-- Descarga del video procesado
+- **Tracking inteligente** de vehículos y personas
+- **Visualización de trayectorias** en tiempo real
+- **Análisis de velocidad** y tiempo de permanencia
+- Estadísticas detalladas por objeto
+- Panel analítico con métricas avanzadas
+- Descarga del video procesado con anotaciones
 - **USO:** `streamlit run video_detector.py`
 
 ### 🔧 `batch_processor.py`
@@ -43,18 +46,20 @@ Script de inicio automático para Windows
 ### 📖 `README.md`
 **Documentación completa del proyecto**
 - Instrucciones de instalación detalladas
+- Características de tracking y análisis de movimiento
+- Casos de uso: tráfico, seguridad, movilidad urbana
 - Lista completa de objetos detectables
 - Configuración avanzada
 - Solución de problemas
-- Ejemplos de uso
+- Datos exportables y análisis estadístico
 
 ### ⚡ `GUIA_RAPIDA.md`
 **Guía de inicio rápido**
 - Inicio en 3 pasos
-- Ejemplos prácticos de uso
-- Tips y trucos
-- Casos de uso reales
-- Comparativa de modelos
+- Ejemplos prácticos para análisis de tráfico
+- Casos de uso reales: vigilancia, monitoreo urbano
+- Tips para análisis de movimiento
+- Comparativa de modelos y rendimiento
 
 ---
 
@@ -164,21 +169,30 @@ python batch_processor.py --input mi_video.mp4 --output resultado.mp4
 
 ---
 
-## 📈 Próximos Pasos
+## 📈 Características Implementadas
 
-### Mejoras Sugeridas
-1. **Tracking de objetos**: Seguir objetos entre frames
-2. **Zonas de interés**: Definir áreas específicas para detectar
-3. **Alertas**: Notificaciones cuando se detectan objetos específicos
+### ✅ Funcionalidades Actuales
+1. **✅ Tracking de objetos**: Seguimiento con IDs únicos entre frames
+2. **✅ Trayectorias visuales**: Visualización del recorrido completo
+3. **✅ Análisis de velocidad**: Cálculo en tiempo real
+4. **✅ Tiempo de permanencia**: Medición automática por objeto
+5. **✅ Estadísticas avanzadas**: Panel completo con métricas
+6. **✅ Exportación de datos**: Tabla interactiva con toda la información
+
+### 🚀 Mejoras Futuras Sugeridas
+1. **Zonas de interés**: Definir áreas específicas para detectar
+2. **Alertas**: Notificaciones cuando se detectan objetos específicos
+3. **Contadores automáticos**: Líneas de conteo para flujo vehicular
 4. **API REST**: Exponer funcionalidad vía API
 5. **Base de datos**: Almacenar histórico de detecciones
-6. **Dashboard**: Panel de análisis de múltiples videos
+6. **Dashboard multi-video**: Panel de análisis de múltiples cámaras
+7. **Análisis de velocidad real**: Calibración para velocidades en km/h
 
-### Personalización
+### 🎨 Personalización
 - Entrenar el modelo con tus propias clases
-- Ajustar colores de las anotaciones
+- Ajustar colores de las trayectorias y anotaciones
 - Agregar filtros específicos por tipo de objeto
-- Exportar datos a formatos específicos (JSON, CSV)
+- Exportar datos a formatos específicos (JSON, CSV, Excel)
 
 ---
 
@@ -207,7 +221,8 @@ Antes de empezar, asegúrate de tener:
 Todo está preparado. Solo necesitas:
 
 1. Elegir tu método de inicio (automático o manual)
-2. Subir un video
-3. Ver la magia de la detección de objetos
+2. Subir un video de tráfico o monitoreo
+3. Ver el tracking inteligente y análisis de movimiento
+4. Analizar las trayectorias, velocidades y estadísticas
 
-**¡Disfruta del proyecto! 🚀**
+**¡Transforma tus videos en datos útiles! 🚗👥📊**

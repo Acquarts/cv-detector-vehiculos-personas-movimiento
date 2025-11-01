@@ -1,16 +1,26 @@
-# 🎥 Detector de Objetos y Personas en Video
+# 🎥 Detector Inteligente de Vehículos y Personas en Movimiento
 
-Una aplicación web interactiva construida con Streamlit que utiliza YOLOv8 para detectar automáticamente objetos y personas en videos.
+Una aplicación web avanzada construida con Streamlit y YOLOv8 que detecta, rastrea y analiza el movimiento de vehículos y personas en videos. Ideal para análisis de tráfico, seguridad, monitoreo urbano y estudios de comportamiento.
 
-## ✨ Características
+## ✨ Características Principales
 
-- 🎯 Detección automática de **80+ categorías de objetos**
-- 👥 Reconocimiento de personas
-- 🚗 Detección de vehículos (coches, motos, bicicletas)
-- 🐕 Identificación de animales
-- 📊 Estadísticas en tiempo real de objetos detectados
-- ⬇️ Descarga del video procesado con anotaciones
-- ⚙️ Umbral de confianza ajustable
+### 🚗 Detección y Tracking Avanzado
+- **Vehículos**: Coches, motos, autobuses, camiones, bicicletas
+- **Personas**: Peatones y personas en movimiento
+- **Tracking con IDs únicos**: Seguimiento individual de cada objeto a través del video
+
+### 📊 Análisis de Movimiento
+- 🛣️ **Trayectorias visuales**: Visualiza el recorrido completo de cada objeto
+- ⏱️ **Tiempo de permanencia**: Mide cuánto tiempo cada objeto está en escena
+- 🚀 **Velocidad de movimiento**: Calcula la velocidad en píxeles por segundo
+- 📈 **Estadísticas detalladas**: Análisis completo por objeto individual
+
+### 📋 Panel de Analítica
+- Distancia total recorrida por cada objeto
+- Velocidad promedio y velocidad máxima
+- Número de frames detectados
+- Tiempo promedio de permanencia
+- Tabla interactiva con todos los datos exportables
 
 ## 🚀 Demo en Vivo
 
@@ -73,52 +83,96 @@ streamlit run video_detector.py
 3. **Sube un video:**
    - Haz clic en "Sube tu video"
    - Selecciona un archivo (MP4, AVI, MOV, MKV)
+   - Ideal: Videos de tráfico, cámaras de seguridad, monitoreo urbano
 
 4. **Ajusta la configuración (opcional):**
    - Usa el slider en la barra lateral para ajustar el umbral de confianza
    - Valores más altos = menos detecciones pero más precisas
    - Valores más bajos = más detecciones pero pueden incluir falsos positivos
 
-5. **Detecta objetos:**
+5. **Analiza el movimiento:**
    - Haz clic en "🚀 Detectar Objetos"
-   - Espera mientras se procesa el video
-   - Visualiza los resultados y estadísticas
+   - Espera mientras se procesa el video con tracking
+   - El sistema rastrea automáticamente cada vehículo y persona
 
-6. **Descarga el resultado:**
+6. **Visualiza los resultados:**
+   - **Video procesado**: Con bounding boxes, trayectorias, velocidades y tiempos
+   - **Líneas verdes**: Muestran la trayectoria de cada objeto
+   - **Texto amarillo**: Velocidad actual en px/s
+   - **Texto cian**: Tiempo que lleva en escena
+
+7. **Analiza las estadísticas:**
+   - Tabla detallada con datos de cada objeto rastreado
+   - Métricas agregadas: objetos totales, tiempos promedio, velocidades
+   - Distancias recorridas por cada vehículo/persona
+
+8. **Descarga el resultado:**
    - Haz clic en "⬇️ Descargar Video Procesado"
+   - El video incluye todas las anotaciones y trayectorias
 
-## 📋 Objetos Detectables
+## 📋 Objetos Detectables con Tracking
 
-El modelo YOLOv8 puede detectar las siguientes categorías:
+El sistema está optimizado especialmente para:
 
-### Personas y Animales
-- Personas
-- Perros, gatos, pájaros, caballos, ovejas, vacas, elefantes, osos, cebras, jirafas
+### 🚗 Vehículos (Análisis Prioritario)
+- **Coches**: Sedanes, SUVs, vehículos particulares
+- **Motocicletas**: Motos de todo tipo
+- **Autobuses**: Transporte público
+- **Camiones**: Vehículos de carga
+- **Bicicletas**: Ciclistas y bicicletas
 
-### Vehículos
-- Coches, motocicletas, aviones, autobuses, trenes, camiones, barcos, bicicletas
+### 👥 Personas (Análisis Prioritario)
+- **Peatones**: Personas caminando
+- **Personas en movimiento**: Corriendo, desplazándose
+- **Grupos de personas**: Multitudes y aglomeraciones
 
-### Objetos de Exterior
-- Semáforos, hidrantes, señales de stop, parquímetros, bancos
+### 🚦 Elementos de Contexto Vial
+- Semáforos
+- Señales de stop
+- Hidrantes
+- Bancos y mobiliario urbano
 
-### Objetos de Interior
-- Sofás, sillas, mesas, camas, inodoros, televisores, laptops, ratones, teclados
-- Teléfonos móviles, microondas, hornos, tostadoras, refrigeradores
-- Libros, relojes, jarrones, tijeras, peluches
+### 🐕 Otros (Capacidad Adicional)
+- Animales domésticos (perros, gatos)
+- Otros vehículos (trenes, aviones, barcos)
+- 70+ categorías adicionales de objetos
 
-### Comida y Bebida
-- Botellas, copas de vino, tazas, tenedores, cuchillos, cucharas, bols
-- Plátanos, manzanas, sándwiches, naranjas, brócoli, zanahorias, pizzas, donas
-
-### Y muchos más... (80+ categorías en total)
+**Nota**: Aunque el sistema puede detectar 80+ categorías, el tracking y análisis de movimiento están optimizados especialmente para vehículos y personas.
 
 ## 🛠️ Tecnologías Utilizadas
 
-- **Streamlit**: Framework para la interfaz web
-- **YOLOv8**: Modelo de detección de objetos de última generación
-- **OpenCV**: Procesamiento de video
-- **Ultralytics**: Implementación de YOLO
-- **NumPy**: Operaciones numéricas
+- **Streamlit**: Framework para la interfaz web interactiva
+- **YOLOv8**: Modelo de detección y tracking de objetos de última generación
+- **OpenCV**: Procesamiento de video y análisis de frames
+- **Ultralytics**: Implementación avanzada de YOLO con tracking
+- **NumPy**: Cálculos de velocidad, distancia y operaciones numéricas
+- **Pandas**: Análisis y presentación de datos estadísticos
+
+## 🎯 Casos de Uso
+
+### 🚦 Análisis de Tráfico
+- Conteo de vehículos en intersecciones
+- Medición de flujo vehicular
+- Identificación de patrones de tráfico
+- Análisis de velocidades promedio
+
+### 🏙️ Monitoreo Urbano
+- Análisis de zonas peatonales
+- Estudio de comportamiento de peatones
+- Detección de aglomeraciones
+- Tiempos de permanencia en áreas específicas
+
+### 🔒 Seguridad y Vigilancia
+- Tracking de personas y vehículos sospechosos
+- Monitoreo de accesos
+- Análisis de movimientos inusuales
+- Registro de trayectorias completas
+
+### 📊 Estudios de Movilidad
+- Análisis de patrones de desplazamiento
+- Estadísticas de uso de vías
+- Estudios de comportamiento vehicular
+- Planificación urbana basada en datos
 
 ## ⚙️ Configuración Avanzada
 
@@ -191,15 +245,30 @@ Los archivos necesarios ya están configurados:
 - `packages.txt`: Dependencias del sistema (Linux)
 - `.streamlit/config.toml`: Configuración de la app
 
-## 📝 Notas
+## 📝 Notas Importantes
 
 - El primer procesamiento puede tardar más debido a la descarga del modelo
 - El tiempo de procesamiento depende de:
   - Duración del video
   - Resolución del video
   - Modelo YOLO utilizado
+  - Cantidad de objetos en movimiento
   - Capacidad de tu hardware
 - Videos de alta resolución y larga duración requieren más tiempo y recursos
+- El tracking funciona mejor con videos estables (sin movimientos bruscos de cámara)
+- Para mejores resultados en análisis de tráfico, usa videos con cámara fija
+
+## 📊 Datos Exportables
+
+La aplicación genera los siguientes datos por cada objeto rastreado:
+- **ID único**: Identificador del objeto a lo largo del video
+- **Clase**: Tipo de objeto (coche, persona, moto, etc.)
+- **Tiempo en escena**: Segundos que el objeto estuvo visible
+- **Distancia recorrida**: Distancia total en píxeles
+- **Velocidad promedio**: Velocidad media en píxeles por segundo
+- **Frames detectados**: Número de frames donde apareció el objeto
+
+Estos datos pueden ser analizados posteriormente para estudios estadísticos o reportes.
 
 ## 🤝 Contribuciones
 
@@ -219,4 +288,4 @@ Este proyecto utiliza:
 
 ---
 
-**¡Disfruta detectando objetos en tus videos! 🎬🔍**
+**¡Analiza el movimiento de vehículos y personas con inteligencia artificial! 🚗👥📊**
