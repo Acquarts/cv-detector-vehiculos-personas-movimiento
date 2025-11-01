@@ -26,7 +26,7 @@ Una aplicación web avanzada construida con Streamlit y YOLOv8 que detecta, rast
 
 Puedes probar la aplicación en línea sin instalar nada:
 
-**[🔗 Abrir App en Streamlit Cloud](https://cv-object-and-person-detector.streamlit.app)**
+**[🔗 Abrir App en Streamlit Cloud](https://cv-detector-vehiculos-personas-movimiento.streamlit.app/)**
 
 ## 📦 Instalación Local
 
